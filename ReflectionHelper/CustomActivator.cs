@@ -76,17 +76,18 @@ namespace ReflectionHelper
                 {
                     var parameterValue = propertiesValues[property.Name];
                     var convertedValue = CastValueToPropertyType(property, parameterValue);
-                    property.SetValue(obj, convertedValue);
+                    property.SetValue(obj, convertedValue, null);
                 }
             }
         }
 
         public static object CastValueToPropertyType(PropertyInfo propertyToBeSetted, object value)
         {
-            Type propertyType = Nullable.GetUnderlyingType(propertyToBeSetted.PropertyType) ?? propertyToBeSetted.PropertyType;
-            object safeValue = (value == null) ? null : Convert.ChangeType(value, propertyType);
+            var propertyType = Nullable.GetUnderlyingType(propertyToBeSetted.PropertyType) ?? propertyToBeSetted.PropertyType;
 
-            return safeValue;
+            return value.GetType() == propertyType 
+                ? value 
+                : Convert.ChangeType(value, propertyType);
         }
 
         public static PropertyInfo[] GetPublicProperties(this Type type)
