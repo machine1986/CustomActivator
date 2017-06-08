@@ -8,6 +8,7 @@ namespace ReflectionHelperTest
 {
     public interface IParametersTest
     {
+        IParametersTest Blub { get; set; }
         int Integer { get; set; }
         bool Boolean { get; set; }
         int AnotherInteger { get; set; }

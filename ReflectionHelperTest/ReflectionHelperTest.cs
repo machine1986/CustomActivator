@@ -24,10 +24,14 @@ namespace ReflectionHelperTest
                 properties.Add("AnotherInteger", "99");
                 properties.Add("AnotherBoolean", "true");
 
-                //We will not pass this property to test if CustomActivator will bring its default value(NULL)
-                //properties.Add("IntegerNullable", 50);
+            var resultObject1 = CustomActivator.CreateInstance<IParametersTest>();
 
-                var resultObject = CustomActivator.CreateInstanceAndPopulateProperties<IParametersTest>(properties);
+            properties.Add("Blub", resultObject1);
+
+            //We will not pass this property to test if CustomActivator will bring its default value(NULL)
+            //properties.Add("IntegerNullable", 50);
+
+            var resultObject = CustomActivator.CreateInstanceAndPopulateProperties<IParametersTest>(properties);
         }
         //[TestMethod]
         //public void CustomActivatorMustInstantiateIntarfaceWithItsDefaultValues()
