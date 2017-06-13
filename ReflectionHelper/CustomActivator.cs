@@ -85,6 +85,11 @@ namespace ReflectionHelper
         {
             var propertyType = Nullable.GetUnderlyingType(propertyToBeSetted.PropertyType) ?? propertyToBeSetted.PropertyType;
 
+            if (value == null)
+            {
+                return propertyType.IsValueType ? Activator.CreateInstance(propertyType) : null;
+            }
+
             var valueType = value.GetType();
 
             return valueType == propertyType || valueType.Name.Contains("ActLike") && valueType.Name.Contains(propertyType.Name)
