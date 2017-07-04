@@ -92,7 +92,7 @@ namespace ReflectionHelper
 
             var valueType = value.GetType();
 
-            return valueType == propertyType || valueType.Name.Contains("ActLike") && valueType.Name.Contains(propertyType.Name)
+            return valueType == propertyType || valueType.Name.Contains("ActLike") && valueType.Name.Contains(propertyType.Name) || valueType.IsGenericType
                 ? value 
                 : Convert.ChangeType(value, propertyType);
         }
